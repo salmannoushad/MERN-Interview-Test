@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: salmanoushad/backend
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGO_URI
+          value: "mongodb+srv://salman:4XvvPQYw9c1aFyoP@cluster0.m6syx.mongodb.net/whiteboard?retryWrites=true&w=majority&appName=Cluster0"
+        - name: NODE_ENV
+          value: "development"
+        - name: PORT
+          value: "5000"
+
